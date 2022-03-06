@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "currency-converter"
+version = "0.1.0"
+description = "A REST API for currency conversions"
+authors = ["Diogo Alves <diogo.alves.ti@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "3.10.2"
+fastapi = "^0.75.0"
+uvicorn = "^0.17.5"
+pytest = "^7.0.1"
+python-dotenv = "^0.19.2"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+isort = "^5.10.1"
+flake8 = "^4.0.1"
+pre-commit = "^2.17.0"
+mypy = "^0.931"
+requests = "^2.27.1"
+
+[tool.black]
+skip-string-normalization = true
+line-length = 79
+
+[tool.isort]
+profile = "black"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
