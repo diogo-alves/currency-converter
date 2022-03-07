@@ -2,6 +2,10 @@ name: ci
 
 on: [push, pull_request]
 
+env:
+  EXCHANGE_RATE_API_KEY: ${{ secrets.EXCHANGE_RATE_API_KEY }}
+  EXCHANGE_RATE_API_URL: ${{ secrets.EXCHANGE_RATE_API_URL }}
+
 jobs:
   tests:
     runs-on: ubuntu-latest
