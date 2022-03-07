@@ -24,9 +24,16 @@ class TestExchangeRateAPIService:
         assert isinstance(rates, dict)
         assert rates
 
-    def test_get_rates_return_all_permitted_currencies(self, rate_service):
+    def test_get_rates_should_return_all_permitted_currencies(
+        self, rate_service
+    ):
         rates = rate_service.get_rates()
         assert all(currency in rates.keys() for currency in CurrencyCode)
+
+    def test_get_rates_should_allow_currency_filtering(self, rate_service):
+        currencies = list(CurrencyCode)[:2]
+        rates = rate_service.get_rates(*currencies)
+        assert len(rates.keys()) == len(currencies)
 
     def test_invalid_api_key(self):
         settings = Settings(EXCHANGE_RATE_API_KEY='')

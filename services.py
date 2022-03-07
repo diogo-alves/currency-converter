@@ -1,4 +1,5 @@
 from decimal import Decimal
+from typing import Any
 
 import httpx
 from fastapi import Depends
@@ -13,13 +14,15 @@ class ExchangeRateAPIService:
         self.URL = settings.EXCHANGE_RATE_API_URL
         self.CURRENCY_BASE = settings.EXCHANGE_RATE_API_BASE
 
-    def get_rates(self) -> dict[str, Decimal]:
+    def get_rates(self, *currencies: str) -> dict[str, float]:
         try:
-            params = {
+            params: dict[str, Any] = {
                 'app_id': self.API_KEY,
                 'base': self.CURRENCY_BASE,
                 'show_alternative': True,  # retorna moedas que ainda não foram liberadas oficialmente na API, como o ETH  # noqa
             }
+            if currencies:
+                params |= {'symbols': ','.join(currencies)}
             response = httpx.get(url=f'{self.URL}/latest.json', params=params)
             response.raise_for_status()
             return response.json()['rates']
@@ -36,7 +39,7 @@ class CurrencyConversionService:
     def convert(
         self, from_currency: str, to_currency: str, amount: Decimal
     ) -> Decimal:
-        rates = self.rate_service.get_rates()
-        rate_from = Decimal(rates.get(from_currency))
-        rate_to = Decimal(rates.get(to_currency))
+        rates = self.rate_service.get_rates(from_currency, to_currency)
+        rate_from = Decimal(rates[from_currency])
+        rate_to = Decimal(rates[to_currency])
         return amount / rate_from * rate_to
