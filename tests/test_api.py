@@ -1,4 +1,5 @@
 from itertools import product
+from numbers import Number
 
 import pytest
 from fastapi import status
@@ -26,11 +27,16 @@ def test_convert_when_parameter_from_is_invalid(client):
 def test_convert_when_parameter_to_is_invalid(client):
     params = {'from': CurrencyCode.BRL, 'to': 'ARS', 'amount': 0}
     response = client.get('/conversions', params=params)
-    # print(response.__dict__)
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
 
 def test_convert_when_parameter_amount_is_invalid(client):
-    params = {'from': CurrencyCode.BRL, 'to': 'ARS', 'amount': -1}
+    params = {'from': CurrencyCode.BRL, 'to': CurrencyCode.EUR, 'amount': -1}
     response = client.get('/conversions', params=params)
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+
+
+def test_convert_should_return_any_type_of_number(client):
+    params = {'from': CurrencyCode.USD, 'to': CurrencyCode.USD, 'amount': 1}
+    response = client.get('/conversions', params=params)
+    assert isinstance(response.json()['result'], Number)

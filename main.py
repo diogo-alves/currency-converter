@@ -1,11 +1,12 @@
 from decimal import Decimal
 
-from fastapi import FastAPI, Query, Request, status
+from fastapi import Depends, FastAPI, Query, Request, status
 from fastapi.responses import JSONResponse
 
 from enums import CurrencyCode
 from exceptions import APIConnectionError
 from schemas import ConversionResponse
+from services import CurrencyConversionService
 
 app = FastAPI(
     title="Currency Converter",
@@ -30,5 +31,7 @@ def convert(
     from_currency: CurrencyCode = Query(..., alias='from'),
     to_currency: CurrencyCode = Query(..., alias='to'),
     amount: Decimal = Query(..., ge=0),
+    conversion_service: CurrencyConversionService = Depends(),
 ) -> ConversionResponse:
-    return ConversionResponse(result=1)
+    result = conversion_service.convert(from_currency, to_currency, amount)
+    return ConversionResponse(result=result)
