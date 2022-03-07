@@ -6,7 +6,7 @@ from typing import List
 from pydantic import BaseSettings
 from pydantic.networks import AnyHttpUrl
 
-from enums import CurrencyCode
+from .enums import CurrencyCode
 
 
 class Settings(BaseSettings):

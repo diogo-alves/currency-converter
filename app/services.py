@@ -4,8 +4,8 @@ from typing import Any
 import httpx
 from fastapi import Depends
 
-from config import Settings, get_settings
-from exceptions import APIConnectionError
+from .config import Settings, get_settings
+from .exceptions import APIConnectionError
 
 
 class ExchangeRateAPIService:

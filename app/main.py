@@ -3,10 +3,10 @@ from decimal import Decimal
 from fastapi import Depends, FastAPI, Query, Request, status
 from fastapi.responses import JSONResponse
 
-from enums import CurrencyCode
-from exceptions import APIConnectionError
-from schemas import ConversionResponse
-from services import CurrencyConversionService
+from .enums import CurrencyCode
+from .exceptions import APIConnectionError
+from .schemas import ConversionResponse
+from .services import CurrencyConversionService
 
 app = FastAPI(
     title="Currency Converter",

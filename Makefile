@@ -18,7 +18,7 @@ install: ## Instala as dependências do projeto
 .PHONY: run
 run: ## Executa a aplicação localmente
 	@ echo "Executando a aplicação..."
-	uvicorn main:app --reload
+	${RUNNER} uvicorn app.main:app --reload
 
 
 .PHONY: linters

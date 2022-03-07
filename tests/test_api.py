@@ -4,7 +4,7 @@ from numbers import Number
 import pytest
 from fastapi import status
 
-from enums import CurrencyCode
+from app.enums import CurrencyCode
 
 
 @pytest.mark.parametrize(

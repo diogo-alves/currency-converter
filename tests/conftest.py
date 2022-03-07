@@ -1,8 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from config import Settings
-from main import app
+from app.config import Settings
+from app.main import app
 
 
 @pytest.fixture

@@ -2,10 +2,10 @@ from decimal import Decimal
 
 import pytest
 
-from config import Settings
-from enums import CurrencyCode
-from exceptions import APIConnectionError
-from services import CurrencyConversionService, ExchangeRateAPIService
+from app.config import Settings
+from app.enums import CurrencyCode
+from app.exceptions import APIConnectionError
+from app.services import CurrencyConversionService, ExchangeRateAPIService
 
 
 @pytest.fixture
