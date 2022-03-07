@@ -12,7 +12,7 @@ class ExchangeRateAPIService:
     def __init__(self, settings: Settings = Depends(get_settings)) -> None:
         self.API_KEY = settings.EXCHANGE_RATE_API_KEY
         self.URL = settings.EXCHANGE_RATE_API_URL
-        self.CURRENCY_BASE = settings.EXCHANGE_RATE_API_BASE
+        self.CURRENCY_BASE = settings.EXCHANGE_RATE_API_CURRENCY_BASE
 
     def get_rates(self, *currencies: str) -> dict[str, float]:
         try:
