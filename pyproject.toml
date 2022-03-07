@@ -19,6 +19,7 @@ flake8 = "^4.0.1"
 pre-commit = "^2.17.0"
 mypy = "^0.931"
 requests = "^2.27.1"
+pytest-cov = "^3.0.0"
 
 [tool.black]
 skip-string-normalization = true
